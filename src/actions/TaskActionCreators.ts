@@ -1,6 +1,6 @@
 import {IAction,IActionResult,IActionErrorResult} from '../models/common'
 import {ITask} from '../models/ITask'
-import {REQUEST_CREATE_TASK,RECEIVE_CREATE_CARD,REQUEST_DELETE_TASK,RECEIVE_DELETE_TASK,REQUEST_TOGGLE_TASK,RECEIVE_TOGGLE_TASK} from '../models/constants'
+import {REQUEST_CREATE_TASK,RECEIVE_CREATE_TASK,REQUEST_DELETE_TASK,RECEIVE_DELETE_TASK,REQUEST_TOGGLE_TASK,RECEIVE_TOGGLE_TASK} from '../models/constants'
 import KanbanAPI from '../api/KanbanAPI'
 
 export interface ITaskAction extends IActionResult{
@@ -23,7 +23,7 @@ export class TaskActionCreators
     }
 
     private static _AddRecieveTask(cartId:number,task:ITask):ITaskAction{
-        return {type:RECEIVE_CREATE_CARD,task:task,cartId:cartId,success:true};
+        return {type:RECEIVE_CREATE_TASK,task:task,cartId:cartId,success:true};
     }
 
     static AddTask(cartId:number,task:ITask){
@@ -34,7 +34,7 @@ export class TaskActionCreators
                 dispatch(this._AddRecieveTask(cartId,new_task));
             }
             catch(error){
-                dispatch(this._sendError(RECEIVE_CREATE_CARD,error));
+                dispatch(this._sendError(RECEIVE_CREATE_TASK,error));
             }
         }
     }

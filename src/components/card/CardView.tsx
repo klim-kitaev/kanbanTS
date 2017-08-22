@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ICard} from '../../models/ICard'
-import {CheckList} from '../checkList/CheckListView'
+import CheckList from '../checkList/CheckListView'
 
 interface ICardProps{
     card:ICard

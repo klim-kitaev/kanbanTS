@@ -33,9 +33,9 @@ export default class KanbanAPI {
     public static addCard(card: ICard): Promise<ICard> {
         return new Promise<ICard>((resolve, reject) => {
 
-            var xhr = new XMLHttpRequest();
-            xhr.setRequestHeader('Authorization', AUTH_KEY);
+            var xhr = new XMLHttpRequest();           
             xhr.open('POST', `${API_URL}/cards`, true);
+            xhr.setRequestHeader('Authorization', AUTH_KEY);
             xhr.send(JSON.stringify(card));
 
             xhr.onreadystatechange = function () {
@@ -55,9 +55,9 @@ export default class KanbanAPI {
 
     public static updateCard(card: ICard, draftCard: ICard): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            var xhr = new XMLHttpRequest();
-            xhr.setRequestHeader('Authorization', AUTH_KEY);
+            var xhr = new XMLHttpRequest();            
             xhr.open('PUT', `${API_URL}/cards/${card.id}`, true);
+            xhr.setRequestHeader('Authorization', AUTH_KEY);
             xhr.send(JSON.stringify(card));
 
             xhr.onreadystatechange = function () {
@@ -76,9 +76,9 @@ export default class KanbanAPI {
 
     public static persistCardDrag(cardId: number, status: StatusTypes, index:number): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            var xhr = new XMLHttpRequest();
-            xhr.setRequestHeader('Authorization', AUTH_KEY);
+            var xhr = new XMLHttpRequest();           
             xhr.open('PUT', `${API_URL}/cards/${cardId}`, true);
+            xhr.setRequestHeader('Authorization', AUTH_KEY);
             xhr.send(JSON.stringify({status,row_order_position:index}));
 
             xhr.onreadystatechange = function () {
@@ -98,9 +98,9 @@ export default class KanbanAPI {
 
     public static addTask(cardId:number,task:ITask): Promise<ITask> {
         return new Promise<ITask>((resolve, reject) => {
-            var xhr = new XMLHttpRequest();
-            xhr.setRequestHeader('Authorization', AUTH_KEY);
+            var xhr = new XMLHttpRequest();           
             xhr.open('POST', `${API_URL}/cards/${cardId}/tasks`, true);
+            xhr.setRequestHeader('Authorization', AUTH_KEY);
             xhr.send(JSON.stringify(task));
 
             xhr.onreadystatechange = function () {
@@ -120,9 +120,9 @@ export default class KanbanAPI {
 
     public static deleteTask(cardId:number,task:ITask): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            var xhr = new XMLHttpRequest();
-            xhr.setRequestHeader('Authorization', AUTH_KEY);
+            var xhr = new XMLHttpRequest();            
             xhr.open('DELETE', `${API_URL}/cards/${cardId}/tasks/${task.id}`, true);
+            xhr.setRequestHeader('Authorization', AUTH_KEY);
             xhr.send();
 
             xhr.onreadystatechange = function () {
@@ -142,9 +142,9 @@ export default class KanbanAPI {
 
     public static toogleTask(cardId:number,task:ITask): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            var xhr = new XMLHttpRequest();
-            xhr.setRequestHeader('Authorization', AUTH_KEY);
+            var xhr = new XMLHttpRequest();           
             xhr.open('PUT', `${API_URL}/cards/${cardId}/tasks/${task.id}`, true);
+            xhr.setRequestHeader('Authorization', AUTH_KEY);
             xhr.send(JSON.stringify({done:!task.done}));
 
             xhr.onreadystatechange = function () {
