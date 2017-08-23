@@ -16,7 +16,8 @@ export const cardsReducer=(state:ICard[]=[],action:IActionResult)=>{
         case RECEIVE_CREATE_TASK:
             if(action.success){
                 let newTask=DeepCopy<ITaskAction>(action).task;
-                let cardIndex=(<ITaskAction>action).cartId;
+                let cardId=(<ITaskAction>action).cartId;
+                let cardIndex=state.indexOf(state.filter(p=>p.id===cardId)[0]);
                 state[cardIndex].tasks.push(newTask);
                 return DeepCopy<ICard>(state);
             }

@@ -21,7 +21,7 @@ export default class KanbanAPI {
                     return;
                 }
 
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
 
@@ -43,7 +43,7 @@ export default class KanbanAPI {
                     return;
                 }
 
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
 
@@ -65,7 +65,7 @@ export default class KanbanAPI {
                     return;
                 }
 
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
 
@@ -86,7 +86,7 @@ export default class KanbanAPI {
                     return;
                 }
 
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
 
@@ -101,6 +101,7 @@ export default class KanbanAPI {
             var xhr = new XMLHttpRequest();           
             xhr.open('POST', `${API_URL}/cards/${cardId}/tasks`, true);
             xhr.setRequestHeader('Authorization', AUTH_KEY);
+            xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(task));
 
             xhr.onreadystatechange = function () {
@@ -108,7 +109,7 @@ export default class KanbanAPI {
                     return;
                 }
 
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
 
@@ -130,7 +131,7 @@ export default class KanbanAPI {
                     return;
                 }
 
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
 
@@ -152,7 +153,7 @@ export default class KanbanAPI {
                     return;
                 }
 
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
 

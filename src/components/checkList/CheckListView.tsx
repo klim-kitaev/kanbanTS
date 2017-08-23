@@ -61,7 +61,7 @@ const mapDispatchToProps=(dispatch:any)=>(
     }
 );
 
-export default connect<{},{},ICheckListPassedProps>(null,mapDispatchToProps)(CheckList);
+export default connect<{},ICheckListOwnProps,ICheckListPassedProps>(null,mapDispatchToProps)(CheckList);
 
 
     

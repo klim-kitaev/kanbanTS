@@ -1504,7 +1504,7 @@ class KanbanAPI {
                 if (this.readyState != 4) {
                     return;
                 }
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
                 resolve(JSON.parse(this.responseText));
@@ -1521,7 +1521,7 @@ class KanbanAPI {
                 if (this.readyState != 4) {
                     return;
                 }
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
                 resolve(JSON.parse(this.responseText));
@@ -1538,7 +1538,7 @@ class KanbanAPI {
                 if (this.readyState != 4) {
                     return;
                 }
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
                 resolve();
@@ -1555,7 +1555,7 @@ class KanbanAPI {
                 if (this.readyState != 4) {
                     return;
                 }
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
                 resolve();
@@ -1567,12 +1567,13 @@ class KanbanAPI {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', `${API_URL}/cards/${cardId}/tasks`, true);
             xhr.setRequestHeader('Authorization', AUTH_KEY);
+            xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(task));
             xhr.onreadystatechange = function () {
                 if (this.readyState != 4) {
                     return;
                 }
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
                 resolve(JSON.parse(this.responseText));
@@ -1589,7 +1590,7 @@ class KanbanAPI {
                 if (this.readyState != 4) {
                     return;
                 }
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
                 resolve();
@@ -1606,7 +1607,7 @@ class KanbanAPI {
                 if (this.readyState != 4) {
                     return;
                 }
-                if (this.status != 200) {
+                if (this.status >= 300) {
                     reject(new Error('ошибка: ' + (this.status ? this.statusText : 'запрос не удался')));
                 }
                 resolve();
@@ -4170,7 +4171,8 @@ exports.cardsReducer = (state = [], action) => {
         case constants_1.RECEIVE_CREATE_TASK:
             if (action.success) {
                 let newTask = utilites_1.DeepCopy(action).task;
-                let cardIndex = action.cartId;
+                let cardId = action.cartId;
+                let cardIndex = state.indexOf(state.filter(p => p.id === cardId)[0]);
                 state[cardIndex].tasks.push(newTask);
                 return utilites_1.DeepCopy(state);
             }
