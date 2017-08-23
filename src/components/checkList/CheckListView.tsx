@@ -7,7 +7,7 @@ import {IDispatch} from '../../models/common'
 import {TaskActionCreators} from '../../actions/TaskActionCreators'
 
 
-interface IDispatchAddTask{
+interface IDispatchTask{
     (cartId:number,task:ITask):void;
 }
 
@@ -17,7 +17,9 @@ interface ICheckListPassedProps extends React.Props<any>{
 }
 
 interface ICheckListOwnProps extends React.Props<any> {
-    addTask:IDispatchAddTask
+    addTask:IDispatchTask;
+    deleteTask:IDispatchTask;
+    toogleTask:IDispatchTask;
 }
 
 export class CheckList extends React.Component<ICheckListPassedProps & ICheckListOwnProps, any> {
@@ -37,9 +39,9 @@ export class CheckList extends React.Component<ICheckListPassedProps & ICheckLis
     render(){
         let tasks=this.props.tasks.map((task)=>
             <li key={task.id} className="checklist__task">
-                <input type="checkbox" defaultChecked={task.done}/>
+                <input type="checkbox" checked={task.done} onChange={this.props.toogleTask.bind(null,this.props.cardId,task)}/>
                 {task.name}
-                <a href="#" className="checklist__task--remove"/>
+                <a href="#" onClick={this.props.deleteTask.bind(null,this.props.cardId,task)} className="checklist__task--remove"/>
             </li>
         );
 
@@ -57,7 +59,9 @@ const mapStateToProps=(state:IState)=>({}
 
 const mapDispatchToProps=(dispatch:any)=>(
     {
-        addTask:(cartId:number,newTask:ITask)=>(dispatch(TaskActionCreators.AddTask(cartId,newTask)))
+        addTask:(cartId:number,newTask:ITask)=>(dispatch(TaskActionCreators.AddTask(cartId,newTask))),
+        deleteTask:(cartId:number,deletedTask:ITask)=>(dispatch(TaskActionCreators.DeleteTask(cartId,deletedTask))),
+        toggleTask:(cartId:number,changedTask:ITask)=>(dispatch(TaskActionCreators.ToggleTask(cartId,changedTask)))
     }
 );
 

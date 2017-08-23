@@ -36,6 +36,7 @@ export default class KanbanAPI {
             var xhr = new XMLHttpRequest();           
             xhr.open('POST', `${API_URL}/cards`, true);
             xhr.setRequestHeader('Authorization', AUTH_KEY);
+            xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(card));
 
             xhr.onreadystatechange = function () {
@@ -58,6 +59,7 @@ export default class KanbanAPI {
             var xhr = new XMLHttpRequest();            
             xhr.open('PUT', `${API_URL}/cards/${card.id}`, true);
             xhr.setRequestHeader('Authorization', AUTH_KEY);
+            xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(card));
 
             xhr.onreadystatechange = function () {
@@ -79,6 +81,7 @@ export default class KanbanAPI {
             var xhr = new XMLHttpRequest();           
             xhr.open('PUT', `${API_URL}/cards/${cardId}`, true);
             xhr.setRequestHeader('Authorization', AUTH_KEY);
+            xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({status,row_order_position:index}));
 
             xhr.onreadystatechange = function () {
@@ -146,6 +149,7 @@ export default class KanbanAPI {
             var xhr = new XMLHttpRequest();           
             xhr.open('PUT', `${API_URL}/cards/${cardId}/tasks/${task.id}`, true);
             xhr.setRequestHeader('Authorization', AUTH_KEY);
+            xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify({done:!task.done}));
 
             xhr.onreadystatechange = function () {

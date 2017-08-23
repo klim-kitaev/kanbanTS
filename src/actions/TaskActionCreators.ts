@@ -7,11 +7,11 @@ export interface ITaskAction extends IActionResult{
     cartId:number,
     task:ITask
 }
-
+/*
 export interface ITaskIndexAction extends ITaskAction{
     taskIndex:number
 }
-
+*/
 export class TaskActionCreators
 {
     private static _sendError(type:string,error:string):IActionErrorResult{
@@ -35,6 +35,49 @@ export class TaskActionCreators
             }
             catch(error){
                 dispatch(this._sendError(RECEIVE_CREATE_TASK,error));
+            }
+        }
+    }
+
+
+    private static _DeleteRequestTask(cartId:number,task:ITask):IAction{
+        return{type:REQUEST_DELETE_TASK}
+    }
+
+    private static _DeleteRecieveTask(cartId:number,task:ITask):ITaskAction{
+        return {type:RECEIVE_DELETE_TASK,task:task,cartId:cartId,success:true};
+    }
+
+    static DeleteTask(cartId:number,task:ITask){
+        return async(dispatch:any)=>{
+            try{
+                this._DeleteRequestTask(cartId,task);
+                await KanbanAPI.deleteTask(cartId,task);
+                dispatch(this._DeleteRecieveTask(cartId,task));
+            }
+            catch(error){
+                dispatch(this._sendError(RECEIVE_DELETE_TASK,error));
+            }
+        }
+    }
+
+    private static _ToggleRequestTask(cartId:number,task:ITask):IAction{
+        return{type:REQUEST_TOGGLE_TASK}
+    }
+
+    private static _ToggleRecieveTask(cartId:number,task:ITask):ITaskAction{
+        return {type:RECEIVE_TOGGLE_TASK,task:task,cartId:cartId,success:true};
+    }
+
+    static ToggleTask(cartId:number,task:ITask){
+        return async(dispatch:any)=>{
+            try{
+                this._ToggleRequestTask(cartId,task);
+                await KanbanAPI.toogleTask(cartId,task);
+                dispatch(this._ToggleRecieveTask(cartId,task));
+            }
+            catch(error){
+                dispatch(this._sendError(RECEIVE_TOGGLE_TASK,error));
             }
         }
     }
