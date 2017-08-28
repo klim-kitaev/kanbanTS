@@ -16,3 +16,10 @@ export enum StatusTypes
     InProgress="in-progress",
     Done="done"
 }
+
+export interface IDraftCard{
+    title:string;
+    description:string;
+    status:StatusTypes;
+    color:string;
+}

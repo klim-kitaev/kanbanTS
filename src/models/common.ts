@@ -14,4 +14,12 @@ export interface IDispatch{
     ():void;
 }
 
+export interface ISubmit{
+    (e:any):void;
+}
+
+export interface IChange{
+    (field:string,value:string):void;
+}
+
 
