@@ -7,6 +7,7 @@ export interface ICard
     title:string;
     description:string;
     status:StatusTypes;
+    color:string;
     tasks:ITask[];
 }
 
@@ -17,9 +18,3 @@ export enum StatusTypes
     Done="done"
 }
 
-export interface IDraftCard{
-    title:string;
-    description:string;
-    status:StatusTypes;
-    color:string;
-}

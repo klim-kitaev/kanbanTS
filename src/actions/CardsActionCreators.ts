@@ -1,6 +1,14 @@
 import {IAction,IActionResult,IActionErrorResult} from '../models/common'
 import {ICard} from '../models/ICard'
-import {REQUEST_CARDS,RECEIVE_CARDS,REQUEST_CREATE_CARD,RECEIVE_CREATE_CARD} from '../models/constants'
+import {
+    REQUEST_CARDS,
+    RECEIVE_CARDS,
+    REQUEST_CREATE_CARD,
+    RECEIVE_CREATE_CARD,
+    CREATE_DRAFT,
+    UPDATE_DRAFT
+
+} from '../models/constants'
 import KanbanAPI from '../api/KanbanAPI'
 
 
@@ -35,6 +43,6 @@ export class CardsActionCreators
             }
         }
     }
-
+}
     
 }
